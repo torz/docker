@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+chown -R mysql:mysql /var/lib/mysql
+
+if [[ $(ls -A /var/lib/mysql) ]]; then
+    /usr/bin/mysql_install_db
+fi
+
+/usr/sbin/mysqld
