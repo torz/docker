@@ -1,0 +1,15 @@
+[Unit]
+Description=Postgres
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill torz/pg93
+ExecStartPre=-/usr/bin/docker rm torz/pg93
+ExecStartPre=/usr/bin/docker pull torz/pg93
+ExecStart=/usr/bin/docker run -d -v /home/core/land:/srv -p 5432:5432 torz/pg93
+
+[Install]
+WantedBy=multi-user.target
+
