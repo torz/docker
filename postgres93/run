@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+PGDATA=/srv/pgsql/data
+
+PGBIN=/usr/lib/postgresql/9.3/bin
+
+chown -R postgres:postgres ${PGDATA}
+chmod 700 ${PGDATA}
+
+exec su - postgres -c "${PGBIN}/postgres -D ${PGDATA}"
+
