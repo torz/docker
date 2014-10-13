@@ -1,0 +1,14 @@
+[Unit]
+Description=mysql
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill torz/mysql
+ExecStartPre=-/usr/bin/docker rm torz/mysql
+ExecStartPre=/usr/bin/docker pull torz/mysql
+ExecStart=/usr/bin/docker run -d -v /home/core/land/mysql:/var/lib/mysql -p 3306:3306 torz/mysql
+
+[Install]
+WantedBy=multi-user.target
