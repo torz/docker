@@ -9,23 +9,25 @@ RUN update-locale LANG=en_GB.UTF-8
 RUN update-locale LANGUAGE=en_GB.UTF-8
 RUN update-locale LC_ALL=en_GB.UTF-8
 
-# get web server ----------------------------------------
+# get web server
 RUN apt-get -qq update && \
     apt-get install -y apache2 \
                        libapache2-mod-wsgi-py3 \
-                       python3-pip
-RUN a2enmod wsgi
-# -------------------------------------------------------
-
-
-# install scipy and deps --------------------------------
-RUN apt-get -qq update && \
-    apt-get install -y libblas3 \
+                       python3-pip \
+                       libblas3 \
                        libblas-dev \
                        libgfortran3 \
                        liblapack3 \
                        liblapack-dev \
-                       gfortran
+                       gfortran \
+                       libhdf5-dev
+
+RUN a2enmod wsgi
+
+
+# install scipy and deps --------------------------------
+RUN apt-get -qq update && \
+
 
 RUN pip3 install numpy
 RUN pip3 install scipy
@@ -36,27 +38,26 @@ RUN pip3 install tables
 RUN pip3 install scikit-learn
 RUN pip3 install flask
 
+
 # install matplotlib ------------------------------------
 RUN apt-get -qq update && \
     apt-get install -y pkg-config \
                        libpng12-dev \
                        libfreetype6-dev
-
 RUN pip3 install matplotlib
+
 
 # install ipython ---------------------------------------
 RUN apt-get -qq update && \
     apt-get install -y libzmq3 \
                        libzmq3-dev
-
 RUN pip3 install pyzmq \
                  tornado \
                  ipython
 
-
 VOLUME ["/var/www"]
 
-EXPOSE 80 443
+EXPOSE 80 443 8888
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
