@@ -49,6 +49,13 @@ RUN pip3 install flask
 # -------------------------------------------------------
 
 
+# install matplotlib ------------------------------------
+RUN apt-get install -y pkg-config \
+                       libpng12-dev \
+                       libfreetype6-dev
+
+RUN pip3 install matplotlib
+
 # install ipython ---------------------------------------
 RUN apt-get install -y libzmq3 \
                        libzmq3-dev
