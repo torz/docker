@@ -10,7 +10,13 @@ RUN update-locale LANGUAGE=en_GB.UTF-8
 RUN update-locale LC_ALL=en_GB.UTF-8
 RUN apt-get -qq update
 RUN apt-get install -y apache2 \
-                       mod-wsgi
+                       libapache2-mod-wsgi-py3 \
+                       pip3
+RUN pip3 install numpy \
+                 scipy \
+                 pandas \
+                 tables \
+                 flask
 
 VOLUME ["/var/www"]
 
