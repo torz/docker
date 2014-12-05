@@ -11,7 +11,16 @@ RUN update-locale LC_ALL=en_GB.UTF-8
 RUN apt-get -qq update
 RUN apt-get install -y apache2 \
                        libapache2-mod-wsgi-py3 \
-                       pip3
+                       pip3 \
+                       libblas3 \
+                       libblas-dev \
+                       libgfortran3 \
+                       liblapack3 \
+                       liblapack-dev \
+                       libgfortran3 \
+                       libgfortran-4.8-dev \
+                       zmq
+
 RUN pip3 install numpy \
                  scipy \
                  pandas \
