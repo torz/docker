@@ -19,7 +19,8 @@ RUN apt-get install -y apache2 \
                        liblapack-dev \
                        libgfortran3 \
                        libgfortran-4.8-dev \
-                       zmq
+                       libzmq3 \
+                       libzmq3-dev
 
 RUN pip3 install numpy \
                  scipy \
