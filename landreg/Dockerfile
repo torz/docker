@@ -9,24 +9,55 @@ RUN update-locale LANG=en_GB.UTF-8
 RUN update-locale LANGUAGE=en_GB.UTF-8
 RUN update-locale LC_ALL=en_GB.UTF-8
 RUN apt-get -qq update
+
+
+# get web server ----------------------------------------
 RUN apt-get install -y apache2 \
                        libapache2-mod-wsgi-py3 \
-                       pip3 \
-                       libblas3 \
+# -------------------------------------------------------
+
+
+# python 3 stuff ----------------------------------------
+RUN apt-get install -y pip3 \
+# -------------------------------------------------------
+
+
+# install scipy and deps --------------------------------
+RUN apt-get install -y libblas3 \
                        libblas-dev \
                        libgfortran3 \
                        liblapack3 \
                        liblapack-dev \
                        libgfortran3 \
                        libgfortran-4.8-dev \
-                       libzmq3 \
-                       libzmq3-dev
 
 RUN pip3 install numpy \
-                 scipy \
+                 scipy
+# -------------------------------------------------------
+
+
+# install some data crunching libs ----------------------
+RUN pip3 install numexpr \
                  pandas \
                  tables \
-                 flask
+                 scikit-learn \
+# -------------------------------------------------------
+
+
+# web framework -----------------------------------------
+RUN pip3 install flask
+# -------------------------------------------------------
+
+
+# install ipython ---------------------------------------
+RUN apt-get install -y libzmq3 \
+                       libzmq3-dev
+
+RUN pip3 install pyzmq \
+                 tornado \
+                 ipython
+# -------------------------------------------------------
+
 
 VOLUME ["/var/www"]
 
