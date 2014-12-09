@@ -53,12 +53,15 @@ RUN chmod -R +rX /srv/ipython
 
 # .[all] only works with -e, so use file://path#egg
 # Can't use -e because ipython2 and ipython3 will clobber each other
+RUN pip2 install file:///srv/ipython#egg=ipython[all]
 RUN pip3 install file:///srv/ipython#egg=ipython[all]
 
 # install kernels
+RUN python2 -m IPython kernelspec install-self --system
 RUN python3 -m IPython kernelspec install-self --system
 
 WORKDIR /tmp/
 
+RUN iptest2
 RUN iptest3
 
