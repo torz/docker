@@ -2,6 +2,14 @@ FROM torz/ipython
 
 MAINTAINER TorZ Corporation
 
+RUN apt-get update && apt-get install -y language-pack-en
+ENV LANGUAGE en_GB.UTF-8
+ENV LANG en_GB.UTF-8
+ENV LC_ALL en_GB.UTF-8
+
+RUN locale-gen en_GB.UTF-8
+RUN dpkg-reconfigure locales
+
 # From https://github.com/ogrisel/docker-openblas
 ADD openblas.conf /etc/ld.so.conf.d/openblas.conf
 
