@@ -1,4 +1,4 @@
-FROM torz/ipython
+FROM ipython/ipython
 
 MAINTAINER TorZ Corporation
 
