@@ -3,7 +3,7 @@
 
 FROM ubuntu:trusty
 
-MAINTAINER IPython Project <ipython-dev@scipy.org>
+MAINTAINER TorZ Corporation
 
 ENV DEBIAN_FRONTEND noninteractive
 

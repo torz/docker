@@ -1,6 +1,6 @@
-FROM ipython/ipython
+FROM torz/ipython
 
-MAINTAINER IPython Project <ipython-dev@scipy.org>
+MAINTAINER TorZ Corporation
 
 # From https://github.com/ogrisel/docker-openblas
 ADD openblas.conf /etc/ld.so.conf.d/openblas.conf
