@@ -30,7 +30,6 @@ cp /tmp/numpy-site.cfg numpy/site.cfg
 git clone -q --branch=v0.14.0 git://github.com/scipy/scipy.git
 cp /tmp/scipy-site.cfg scipy/site.cfg
 
-curl https://bootstrap.pypa.io/get-pip.py | python2
 curl https://bootstrap.pypa.io/get-pip.py | python3
 
   PYTHON="python3"
