@@ -4,12 +4,14 @@ MAINTAINER "The Galactic Empire"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN locale-gen en_GB.UTF-8
-RUN update-locale LANG=en_GB.UTF-8
-RUN update-locale LANGUAGE=en_GB.UTF-8
-RUN update-locale LC_ALL=en_GB.UTF-8
+RUN apt-get -qq update && apt-get install -y language-pack-en
+ENV LANGUAGE en_GB.UTF-8
+ENV LANG en_GB.UTF-8
+ENV LC_ALL en_GB.UTF-8
 
-# get web server
+RUN locale-gen en_GB.UTF-8
+RUN dpkg-reconfigure locales
+
 RUN apt-get -qq update && \
     apt-get install -y python3-pip \
                        libblas3 \
@@ -20,7 +22,6 @@ RUN apt-get -qq update && \
                        gfortran \
                        libhdf5-dev
 
-
 RUN pip3 install numpy
 RUN pip3 install scipy
 RUN pip3 install cython
@@ -28,8 +29,7 @@ RUN pip3 install numexpr
 RUN pip3 install pandas
 RUN pip3 install tables
 RUN pip3 install scikit-learn
-RUN pip3 install flask
-
+RUN pip3 install blaze
 
 # install matplotlib ------------------------------------
 RUN apt-get -qq update && \
@@ -45,7 +45,12 @@ RUN apt-get -qq update && \
                        libzmq3-dev
 RUN pip3 install pyzmq \
                  tornado \
+                 jinja2 \
                  ipython
+
+# might make the image smaller
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD run.sh /
 RUN chmod +x /run.sh
