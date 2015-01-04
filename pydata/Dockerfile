@@ -30,6 +30,7 @@ RUN pip3 install pandas
 RUN pip3 install tables
 RUN pip3 install scikit-learn
 RUN pip3 install blaze
+RUN pip3 install bokeh
 
 # install matplotlib ------------------------------------
 RUN apt-get -qq update && \
