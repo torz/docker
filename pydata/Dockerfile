@@ -3,14 +3,15 @@ FROM ubuntu:trusty
 MAINTAINER "The Galactic Empire"
 
 ENV DEBIAN_FRONTEND noninteractive
-
 RUN apt-get -qq update && apt-get install -y language-pack-en
+
 ENV LANGUAGE en_GB.UTF-8
 ENV LANG en_GB.UTF-8
 ENV LC_ALL en_GB.UTF-8
 
 RUN locale-gen en_GB.UTF-8
 RUN dpkg-reconfigure locales
+RUN update-locale LANG=en_GB.UTF-8
 
 RUN apt-get -qq update && \
     apt-get install -y python3-pip \
